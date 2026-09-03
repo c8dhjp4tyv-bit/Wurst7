@@ -44,6 +44,22 @@ public interface IKeyMapping
 		asVanilla().setDown(down);
 	}
 	
+	/**
+	 * Sets whether this key is being pressed, ignoring any "Toggle" option
+	 * that the user may have set for it in the vanilla controls menu.
+	 *
+	 * <p>
+	 * Use this instead of {@link #setDown(boolean)} for keys that can be
+	 * toggled, like sneak and sprint. Those are {@code ToggleKeyMapping}s,
+	 * whose {@code setDown()} flips the key's state when called with
+	 * {@code true} and does nothing at all when called with {@code false},
+	 * making it impossible to control them reliably.
+	 */
+	public default void setDownIgnoringToggle(boolean down)
+	{
+		wurst_setDownIgnoringToggle(down);
+	}
+	
 	public default KeyMapping asVanilla()
 	{
 		return (KeyMapping)this;
@@ -75,4 +91,10 @@ public interface IKeyMapping
 	 */
 	@Deprecated
 	public void wurst_simulatePress(boolean pressed);
+	
+	/**
+	 * @deprecated Use {@link #setDownIgnoringToggle(boolean)} instead.
+	 */
+	@Deprecated
+	public void wurst_setDownIgnoringToggle(boolean down);
 }

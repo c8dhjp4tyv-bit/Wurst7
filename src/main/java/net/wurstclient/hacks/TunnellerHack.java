@@ -41,6 +41,7 @@ import net.wurstclient.events.UpdateListener;
 import net.wurstclient.hack.DontSaveState;
 import net.wurstclient.hack.Hack;
 import net.wurstclient.hack.HackList;
+import net.wurstclient.mixinterface.IKeyMapping;
 import net.wurstclient.settings.CheckboxSetting;
 import net.wurstclient.settings.EnumSetting;
 import net.wurstclient.settings.SliderSetting;
@@ -169,7 +170,7 @@ public final class TunnellerHack extends Hack
 		KeyMapping[] bindings = {gs.keyUp, gs.keyDown, gs.keyLeft, gs.keyRight,
 			gs.keyJump, gs.keyShift};
 		for(KeyMapping binding : bindings)
-			binding.setDown(false);
+			IKeyMapping.get(binding).setDownIgnoringToggle(false);
 		
 		for(Task task : tasks)
 		{
@@ -456,7 +457,7 @@ public final class TunnellerHack extends Hack
 		@Override
 		public void run()
 		{
-			MC.options.keyShift.setDown(true);
+			IKeyMapping.get(MC.options.keyShift).setDownIgnoringToggle(true);
 			Vec3 velocity = MC.player.getDeltaMovement();
 			MC.player.setDeltaMovement(0, velocity.y, 0);
 			
@@ -701,7 +702,7 @@ public final class TunnellerHack extends Hack
 				return;
 			}
 			
-			MC.options.keyShift.setDown(true);
+			IKeyMapping.get(MC.options.keyShift).setDownIgnoringToggle(true);
 			placeBlockSimple(nextTorch);
 		}
 		

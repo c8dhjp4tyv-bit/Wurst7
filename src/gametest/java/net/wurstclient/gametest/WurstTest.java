@@ -150,6 +150,7 @@ public class WurstTest implements FabricClientGameTest
 		new AttributeSwapMechanicTest(context, spContext).run();
 		new OcclusionCullingTest(context, spContext).run();
 		new PistonTest(context, spContext).run();
+		new ToggleKeyMechanicTest(context, spContext).run();
 	}
 	
 	// because the grass texture is randomized and smooth stone isn't
